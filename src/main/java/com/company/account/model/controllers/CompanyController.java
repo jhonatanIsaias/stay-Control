@@ -1,0 +1,24 @@
+package com.company.account.model.controllers;
+
+import com.company.account.model.entities.Company;
+import com.company.account.model.services.CompanyService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(value = "/companies")
+public class CompanyController {
+    @Autowired
+CompanyService companyService;
+
+    @GetMapping
+    public ResponseEntity<List<Company>> findAll(){
+        List<Company> list = companyService.findAll();
+        return ResponseEntity.ok().body(list);
+    }
+
+
+}
