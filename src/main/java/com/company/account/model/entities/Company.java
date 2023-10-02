@@ -1,6 +1,7 @@
 package com.company.account.model.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -16,11 +17,12 @@ public class Company implements Serializable {
     private Long id;
     private String password;
     private String email;
+    @JsonIgnore
+    @OneToMany(mappedBy = "company")
+    private List<Cliente> clientes = new ArrayList<>();
 
-    private List<Expense> expenses = new ArrayList<>();
-@OneToMany(mappedBy = "company")
-    public List<Expense> getExpenses() {
-        return expenses;
+    public List<Cliente> getClientes() {
+        return clientes;
     }
 
     public Company(){
