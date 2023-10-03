@@ -3,7 +3,6 @@ package com.company.account.model.entities;
 import com.company.account.model.enums.ExpenseStatus;
 import jakarta.persistence.*;
 
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,29 +16,37 @@ public class Expense implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Cliente cliente;
-
-   DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private Double value;
-
     private Integer expenseStatus;
-    private LocalDate dateLimit;
+    private LocalDate date;
+    private Integer dayLimit;
 
 
 
-    public Expense(Long id, Double value, LocalDate date, ExpenseStatus expenseStatus) {
+    public Expense(Long id, Cliente cliente, Double value, LocalDate date, ExpenseStatus expenseStatus ,Integer dayLimit) {
         this.id = id;
+        this.cliente = cliente;
         this.value = value;
         setExpenseStatus(expenseStatus);
-        this.dateLimit = LocalDate.parse(dateTimeFormatter.format(dateLimit));
+        this.date = date;
+        this.dayLimit =dayLimit;
+    }
+    public Expense() {
     }
 
     public Long getId() {
         return id;
     }
 
-    public Expense() {
+
+
+    public Integer getDayLimit() {
+        return dayLimit;
     }
 
+    public void setDayLimit(Integer dayLimit) {
+        this.dayLimit = dayLimit;
+    }
     public void setId(Long id) {
         this.id = id;
     }
@@ -52,11 +59,11 @@ public class Expense implements Serializable {
     }
 
     public LocalDate getDateLimit() {
-        return dateLimit;
+        return date;
     }
 
     public void setDateLimit(LocalDate dateLimit) {
-        this.dateLimit = LocalDate.parse(dateTimeFormatter.format(dateLimit));
+        this.date = dateLimit;
     }
 
     public ExpenseStatus getExpenseStatus() {

@@ -12,11 +12,12 @@ public class ClientService {
     @Autowired
     ClientRepository clientRepository;
 
-    public void saveCompany(Cliente cliente){
+    public void saveClient(Cliente cliente){
         clientRepository.save(cliente);
     }
     public List<Cliente> findAll(){
         List<Cliente> list =  clientRepository.findAll();
         return list;
     }
+
 }

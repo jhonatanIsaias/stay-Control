@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Company implements Serializable {
@@ -19,9 +17,9 @@ public class Company implements Serializable {
     private String email;
     @JsonIgnore
     @OneToMany(mappedBy = "company")
-    private List<Cliente> clientes = new ArrayList<>();
+    private Set<Cliente> clientes = new HashSet<>();
 
-    public List<Cliente> getClientes() {
+    public Set<Cliente> getClientes() {
         return clientes;
     }
 

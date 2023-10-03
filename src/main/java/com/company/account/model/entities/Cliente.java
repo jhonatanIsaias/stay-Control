@@ -2,6 +2,7 @@ package com.company.account.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.apache.el.stream.Stream;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -71,4 +72,11 @@ public class Cliente implements Serializable {
         return Objects.hash(getId());
     }
 
+    public Double TotalExpenses(){
+        double sum = 0.0;
+        for(Expense expense : expenses){
+            sum += expense.getValue();
+        }
+        return sum;
+    }
 }
