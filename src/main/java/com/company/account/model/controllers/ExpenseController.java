@@ -1,8 +1,5 @@
 package com.company.account.model.controllers;
 
-
-
-
 import com.company.account.model.entities.Expense;
 import com.company.account.model.services.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +33,20 @@ public class ExpenseController {
     public ResponseEntity<Expense> findById(@PathVariable Long id){
       Expense obj =   expenseService.findById(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        expenseService.deleteExpense(id);
+        return ResponseEntity.noContent().build();
+
+    }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Expense> updateExpense(@PathVariable Long id ,@RequestBody Expense expense){
+        expenseService.updateExpense(id,expense);
+
+        return ResponseEntity.ok().body(expense);
+
     }
 
 

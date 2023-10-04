@@ -1,6 +1,7 @@
 package com.company.account.model.entities;
 
 import com.company.account.model.enums.ExpenseStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -18,18 +19,19 @@ public class Expense implements Serializable {
     private Cliente cliente;
     private Double value;
     private Integer expenseStatus;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate date;
-    private Integer dayLimit;
 
 
 
-    public Expense(Long id, Cliente cliente, Double value, LocalDate date, ExpenseStatus expenseStatus ,Integer dayLimit) {
+
+    public Expense(Long id, Cliente cliente, Double value, LocalDate date, ExpenseStatus expenseStatus) {
         this.id = id;
         this.cliente = cliente;
         this.value = value;
         setExpenseStatus(expenseStatus);
         this.date = date;
-        this.dayLimit =dayLimit;
+
     }
     public Expense() {
     }
@@ -39,14 +41,6 @@ public class Expense implements Serializable {
     }
 
 
-
-    public Integer getDayLimit() {
-        return dayLimit;
-    }
-
-    public void setDayLimit(Integer dayLimit) {
-        this.dayLimit = dayLimit;
-    }
     public void setId(Long id) {
         this.id = id;
     }

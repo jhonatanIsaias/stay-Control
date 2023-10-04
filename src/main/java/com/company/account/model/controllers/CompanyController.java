@@ -28,6 +28,12 @@ CompanyService companyService;
         List<Company> list = companyService.findAll();
         return ResponseEntity.ok().body(list);
     }
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        companyService.deleteCompany(id);
+        return ResponseEntity.noContent().build();
+
+    }
 
 
 }

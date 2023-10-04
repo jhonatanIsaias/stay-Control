@@ -26,4 +26,18 @@ public class ExpenseService {
        Optional<Expense> obj = expenseRepository.findById(id);
        return obj.get();
     }
+    public void deleteExpense(Long id){
+        expenseRepository.deleteById(id);
+    }
+    public Expense updateExpense(Long id, Expense expenseUpdated){
+       Expense obj = expenseRepository.getReferenceById(id);
+       updateData(obj,expenseUpdated);
+
+    return expenseRepository.save(obj);
+    }
+
+    public void updateData(Expense expense, Expense expenseUpdated){
+
+        expense.setExpenseStatus(expenseUpdated.getExpenseStatus());
+    }
 }

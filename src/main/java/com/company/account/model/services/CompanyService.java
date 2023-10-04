@@ -19,4 +19,7 @@ public class CompanyService {
        List<Company> list =  companyRepository.findAll();
        return list;
     }
+    public void deleteCompany(Long id){
+        companyRepository.deleteById(id);
+    }
 }

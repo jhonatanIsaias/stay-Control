@@ -29,4 +29,18 @@ public class ClienteController {
         List<Cliente> list = clienteService.findAll();
         return ResponseEntity.ok().body(list);
     }
-}
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+       clienteService.deleteCliente(id);
+        return ResponseEntity.noContent().build();
+
+    }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Cliente> updateExpense(@PathVariable Long id , @RequestBody Cliente cliente){
+        clienteService.updateCliente(id,cliente);
+
+        return ResponseEntity.ok().body(cliente);
+
+     }
+    }
+

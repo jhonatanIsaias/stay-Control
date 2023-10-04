@@ -22,14 +22,15 @@ public class Cliente implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Expense> expenses = new ArrayList<>();
-
+    private Integer dayLimit;
     public Cliente() {
     }
 
-    public Cliente(String name, Long id, Company company) {
+    public Cliente(String name, Long id, Company company,Integer dayLimit) {
         this.name = name;
         this.id = id;
         this.company = company;
+        this.dayLimit = dayLimit;
     }
 
     public Company getCompany() {
@@ -58,6 +59,14 @@ public class Cliente implements Serializable {
 
     public List<Expense> getExpenses() {
         return expenses;
+    }
+
+    public Integer getDayLimit() {
+        return dayLimit;
+    }
+
+    public void setDayLimit(Integer dayLimit) {
+        this.dayLimit = dayLimit;
     }
 
     @Override

@@ -19,5 +19,25 @@ public class ClientService {
         List<Cliente> list =  clientRepository.findAll();
         return list;
     }
+    public void deleteCliente(Long id){
+        clientRepository.deleteById(id);
+    }
 
+    public Cliente updateCliente(Long id , Cliente clienteUpdated){
+        Cliente obj = clientRepository.getReferenceById(id);
+        updateData(obj,clienteUpdated);
+
+        return clientRepository.save(obj);
+    }
+
+    private void updateData(Cliente obj, Cliente clienteUpdated) {
+        if(clienteUpdated.getName() != null) {
+            obj.setName(clienteUpdated.getName());
+        }
+
+        if(clienteUpdated.getDayLimit() != null) {
+            obj.setDayLimit(clienteUpdated.getDayLimit());
+        }
+
+    }
 }
