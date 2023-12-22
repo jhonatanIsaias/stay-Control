@@ -29,6 +29,11 @@ public class ClienteController {
         List<Cliente> list = clienteService.findAll();
         return ResponseEntity.ok().body(list);
     }
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Cliente> findById(@PathVariable long id){
+        Cliente client = clienteService.findById(id);
+        return ResponseEntity.ok().body(client);
+    }
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
        clienteService.deleteCliente(id);

@@ -2,7 +2,9 @@ package com.company.account.model.services;
 
 import com.company.account.model.entities.Company;
 import com.company.account.model.repositories.CompanyRepository;
+import com.company.account.model.services.Exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,10 @@ public class CompanyService {
        return list;
     }
     public void deleteCompany(Long id){
-        companyRepository.deleteById(id);
+        try{
+            companyRepository.deleteById(id);
+        }catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFoundException(id);
+        }
     }
 }

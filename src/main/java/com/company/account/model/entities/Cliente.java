@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import org.apache.el.stream.Stream;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -62,7 +63,7 @@ public class Cliente implements Serializable {
     }
 
     public Integer getDayLimit() {
-        return dayLimit;
+       return  this.dayLimit;
     }
 
     public void setDayLimit(Integer dayLimit) {

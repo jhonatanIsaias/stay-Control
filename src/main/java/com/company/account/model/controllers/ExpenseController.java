@@ -29,9 +29,10 @@ public class ExpenseController {
         return ResponseEntity.ok().body(list);
     }
 
-    @GetMapping(value = "{ìd}")
+
+    @GetMapping(value = "{id}")
     public ResponseEntity<Expense> findById(@PathVariable Long id){
-      Expense obj =   expenseService.findById(id);
+      Expense obj = expenseService.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
@@ -41,13 +42,7 @@ public class ExpenseController {
         return ResponseEntity.noContent().build();
 
     }
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Expense> updateExpense(@PathVariable Long id ,@RequestBody Expense expense){
-        expenseService.updateExpense(id,expense);
 
-        return ResponseEntity.ok().body(expense);
-
-    }
 
 
 }

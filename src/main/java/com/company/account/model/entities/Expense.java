@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 @Entity
@@ -17,7 +16,9 @@ public class Expense implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Cliente cliente;
-    private Double value;
+    @Column
+    private Float value;
+    @Column
     private Integer expenseStatus;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate date;
@@ -25,7 +26,7 @@ public class Expense implements Serializable {
 
 
 
-    public Expense(Long id, Cliente cliente, Double value, LocalDate date, ExpenseStatus expenseStatus) {
+    public Expense(Long id, Cliente cliente, Float value, LocalDate date, ExpenseStatus expenseStatus) {
         this.id = id;
         this.cliente = cliente;
         this.value = value;
@@ -44,11 +45,11 @@ public class Expense implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    public Double getValue() {
+    public Float getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(Float value) {
         this.value = value;
     }
 
