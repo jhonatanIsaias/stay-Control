@@ -8,13 +8,14 @@ import com.company.account.model.enums.ExpenseStatus;
 import com.company.account.model.repositories.ExpenseRepository;
 import com.company.account.model.services.Exceptions.DayLimitException;
 import com.company.account.model.services.Exceptions.ResourceNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +38,7 @@ public class ExpenseService {
         expenseRepository.save(expense);
     }
     private List<Expense> findExpensesByIdClient(long clientID){
-     List<Expense> list = expenseRepository.findByClientId(clientID);
+     List<Expense> list = expenseRepository.findByClienteId(clientID);
      return  list;
     }
     private void updateStatus() {
@@ -45,12 +46,16 @@ public class ExpenseService {
         LocalDate today = LocalDate.now();
         for(Expense e : expenses){
 
-            long time = ChronoUnit.DAYS.between(e.getDateLimit(),today);
-            if(time > e.getCliente().getDayLimit()){
-
-               e.setExpenseStatus(ExpenseStatus.ATRASADO);
+            if(today.isAfter(e.getDate())){
+                if(today.getDayOfMonth() >= e.getCliente().getDayLimit() && e.getExpenseStatus() != ExpenseStatus.PAGO){
+                    e.setExpenseStatus(ExpenseStatus.ATRASADO);
+                    expenseRepository.save(e);
+                }
             }
         }
+    }
+    public void payExpenses(long clienteId,int month){
+
     }
     public List<Expense> findAll(){
         updateStatus();
@@ -70,5 +75,6 @@ public class ExpenseService {
             throw new ResourceNotFoundException(id);
         }
     }
+
 
 }

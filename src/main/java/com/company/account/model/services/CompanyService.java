@@ -5,6 +5,7 @@ import com.company.account.model.repositories.CompanyRepository;
 import com.company.account.model.services.Exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,5 +28,8 @@ public class CompanyService {
         }catch (EmptyResultDataAccessException e){
             throw new ResourceNotFoundException(id);
         }
+    }
+    public UserDetails findByEmail(String email){
+       return companyRepository.findByEmail(email);
     }
 }

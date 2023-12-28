@@ -26,7 +26,7 @@ public class ResourceExceptionHandler {
     }
     @ExceptionHandler(DayLimitException.class)
     public ResponseEntity<StandError> limit(DayLimitException e, HttpServletRequest request){
-        String error ="day limit expire";
+        String error ="your client have expenses expire";
         HttpStatus status = HttpStatus.BAD_REQUEST;
         StandError err = new StandError(Instant.now(),status.value(),error,e.getMessage(),request.getRequestURI());
         return ResponseEntity.status(status).body(err);

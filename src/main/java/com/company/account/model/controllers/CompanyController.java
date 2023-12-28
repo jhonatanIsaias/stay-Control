@@ -16,13 +16,8 @@ import java.util.List;
 public class CompanyController {
     @Autowired
 CompanyService companyService;
-    @PostMapping
-    public ResponseEntity<Company> save(@RequestBody Company company){
-      companyService.saveCompany(company);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(company.getId()).toUri();
-        return  ResponseEntity.created(uri).body(company);
-    }
+
+
     @GetMapping
     public ResponseEntity<List<Company>> findAll(){
         List<Company> list = companyService.findAll();

@@ -53,7 +53,7 @@ public class Expense implements Serializable {
         this.value = value;
     }
 
-    public LocalDate getDateLimit() {
+    public LocalDate getDate() {
         return date;
     }
 
