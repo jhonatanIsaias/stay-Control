@@ -1,17 +1,27 @@
 package com.company.account.model.enums;
 
 public enum RolesEnum {
-    ADMIN("admin"),
-    USER("user");
+    ADMIN(1),
+    USER(2);
 
 
-    private String role;
+    private int code;
 
-    RolesEnum(String role){
-        this.role = role;
+    RolesEnum(int code) {
+        this.code = code;
     }
 
-    public String getRole(){
-        return role;
+    public int getCode() {
+        return code;
     }
+
+    public static RolesEnum valueOf(int code) {
+        for (RolesEnum value : RolesEnum.values()) {
+            if (value.getCode() == code) {
+                return value;
+            }
+        }
+        throw new IllegalArgumentException("role não encontrado");
+    }
+
 }

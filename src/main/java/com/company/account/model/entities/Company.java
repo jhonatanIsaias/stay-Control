@@ -19,7 +19,7 @@ public class Company implements Serializable,UserDetails {
     private Long id;
     private String password;
     private String email;
-    private RolesEnum role;
+    private int role;
     @JsonIgnore
     @OneToMany(mappedBy = "company")
     private Set<Cliente> clientes = new HashSet<>();
@@ -34,14 +34,14 @@ public class Company implements Serializable,UserDetails {
         this.name = name;
     }
 
-    public Company(Long id, String name, String password, String email,RolesEnum role) {
+    public Company(Long id, String name, String password, String email,int role) {
         this.name = name;
         this.password = password;
         this.email = email;
         this.id = id;
         this.role = role;
     }
-    public Company( String name, String password, String email,RolesEnum role) {
+    public Company( String name, String password, String email,int role) {
         this.name = name;
         this.password = password;
         this.email = email;
@@ -64,9 +64,19 @@ public class Company implements Serializable,UserDetails {
         this.id = id;
     }
 
+    public RolesEnum getRole() {
+        return RolesEnum.valueOf(role);
+    }
+
+    public void setRole(RolesEnum role) {
+        if(role != null){
+            this.role = role.getCode();
+        }
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-       if(this.role == RolesEnum.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+       if(this.getRole() == RolesEnum.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
